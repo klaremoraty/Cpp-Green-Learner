@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+int main()
+{
+	int n,members;
+	double mx,my;
+	double count = 0;
+	std::cin >> n;
+	while (n > 0){
+		n--;
+		std::cin >> mx >> my >> members;
+		count += members * 1.5;
+		int xy = mx*mx + my*my;
+		double mi = std::sqrt(xy);
+		count += mi*2 / 50;
+	}
+	std::cout << std::ceil(count) << std::endl;
+	return 0;
+}
