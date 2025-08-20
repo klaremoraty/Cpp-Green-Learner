@@ -1,0 +1,41 @@
+#include<iostream>
+#include<cstdio>
+
+int main()
+{
+	int n;
+	double e = 1,step=1.0;
+	std::cin >> n;
+	for (int i = 1;i <= n;i++){
+		step *= i;
+		e += 1/step;
+	}
+	printf("%.10f",e);
+	return 0;
+}
+
+
+
+#include<iostream>
+#include<cstdio>
+long long factorial(int num)
+{
+	long long ans=1;
+	for (num;num>0;num--){
+		ans *= num;
+	}
+	return ans;
+}
+int main()
+{
+	int n;
+	double e = 1;
+	std::cin >> n;
+	while (n>0){
+		long long tem = factorial(n);
+		e += 1.0/tem;
+		n--;
+	}
+	printf("%.10f",e);
+	return 0;
+}
