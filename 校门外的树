@@ -1,0 +1,22 @@
+#include <iostream>
+
+int main()
+{
+	int L,M,i=0;
+	int loads[10001]= {0};
+	std::cin >> L >> M;
+	while (i<M){
+		int left,right;
+		std::cin >> left >> right;
+		for (left;left <= right;left++){
+			loads[left] = 1;
+		}
+		i++;
+	}
+	int ans = 0;
+	for (int i = 0;i <= L;i++){
+		if (loads[i] == 0) ans++;
+	}
+	std::cout << ans << std::endl;
+	return 0;
+}
