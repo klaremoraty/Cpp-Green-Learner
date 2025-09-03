@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	int n,tem = 1;
+	cin >> n;
+	if ((n - 1) % 2)
+		n--;
+	int last_num = (n - 1) / 2;
+	vector<int> nums;
+	while (last_num > 0) {
+		nums.push_back(tem);
+		last_num -= tem;
+		tem += 2;
+	}
+	int index = nums.size()-1;
+	vector<int> nums_copy = nums;
+	for (index-1; index >= 0; index--) {
+		int kongge = nums.size()-1 - index;
+		while (kongge > 0) {
+				cout << " ";
+				kongge--;
+		}
+		while (nums[index] > 0) {
+			cout << "*";
+			nums[index]--;
+		}
+		cout << endl;
+	}
+	index = 1;
+	for (index; index < nums.size(); index++) {
+		int kongge = nums.size() - 1 - index;
+		while (kongge > 0) {
+			cout << " ";
+			kongge--;
+		}
+		while (nums_copy[index] > 0) {
+			cout << "*";
+			nums_copy[index]--;
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
