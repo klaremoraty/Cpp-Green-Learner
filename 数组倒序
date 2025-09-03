@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int main() 
+{
+	int n;
+	cin >> n;
+	int nums[5];
+	for (int i = 0; i < n; i++) {
+		cin >> nums[i];
+	}
+	int start = 0, end = n - 1,tem;
+	while (start < end) {
+		tem = nums[start];
+		nums[start] = nums[end];
+		nums[end] = tem;
+		start++;
+		end--;
+	}
+	for (int i = 0; i < n; i++) {
+		cout << nums[i] << endl;
+	}
+
+
+	return 0;
+}
