@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	int num = 100;
+	do {
+		int a = num % 10; // ge
+		int b = num / 100; // bai
+		int c = num / 10 % 10;// shi
+		if (a * a * a + b * b * b + c * c * c == num)
+			cout << num << endl;
+		num++;
+	} while (num < 1000);
+
+	
+
+	return 0;
+}
