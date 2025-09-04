@@ -1,0 +1,23 @@
+#include "swap.h"
+#include <iostream>
+using namespace std;
+
+struct Student {
+	string name;
+	int age;
+	int score;
+};
+
+int main()
+{
+	struct Student s = {
+		"Kate",18,100
+	};
+	struct Student* p = &s;
+	cout << "name: " << p->name
+		<< " age: " << p->age
+		<< " score: " << p->score << endl;
+
+	return 0;
+}
+
