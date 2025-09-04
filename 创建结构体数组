@@ -1,0 +1,32 @@
+#include "swap.h"
+#include <iostream>
+using namespace std;
+
+struct Student {
+	string name;
+	int age;
+	int score;
+};
+
+int main()
+{
+	struct Student stuArray[3] = {
+		{"Lisa",18,100 },
+		{"Bob",19,99 },
+		{"Kate",20,98}
+	};
+	stuArray[0].name = "Klare";
+	stuArray[1].age = 22;
+	stuArray[2].score = 90;
+	for (int i = 0; i < 3; i++) {
+		cout << "name: " << stuArray[i].name 
+			<< " age: " << stuArray[i].age 
+			<< " score: " << stuArray[i].score 
+			<< endl;
+
+	}
+
+
+	return 0;
+}
+
