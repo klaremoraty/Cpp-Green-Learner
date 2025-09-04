@@ -1,0 +1,29 @@
+#include <iostream>  // 头文件
+using namespace std;
+
+// 定义函数isDecrease，判断n是否为降序数
+bool isDecrease(int n) {
+	int ge,tem = n % 10; // tem为数字n的最后一位数，ge设定为tem的前一位数字
+	n /= 10;
+	while (n) {
+		ge = n % 10;
+		if (ge < tem) {
+			return false;
+		}
+		tem = ge;
+		n /= 10;
+	}
+	return true;
+}
+
+int main() {
+	int n; // 初始化数字n
+	cin >> n;
+	if (isDecrease(n))
+		cout << 1;
+	else
+		cout << 0;
+	return 0;
+}
+
+
