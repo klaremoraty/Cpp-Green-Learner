@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+
+using namespace std;
+
+struct student {
+	string name;
+	int score;
+};
+
+struct teacher {
+	string name;
+	vector <student> stu;
+};
+
+void teacher_design(int n,int m,vector<teacher> &t) {
+	for (int i = 0; i < n; i++) {
+		cout << "teacher" << i+1 << "'s name: ";
+		cin >> t[i].name;
+		t[i].stu.resize(m);
+		for (int j = 0; j < m; j++) {
+			cout << "stu_" << j + 1 << "'s name: ";
+			cin >> t[i].stu[j].name;
+			//cout << "stu_" << j + 1 << "'s score: ";
+			//cin >> t[i].stu[j].score;
+			int random = rand() % 60 + 40;
+			t[i].stu[j].score = random;
+ 		}
+	}
+}
+
+void print(int n, int m, vector<teacher> &t) {
+	for (int i = 0; i < n; i++) {
+		cout << t[i].name << " is: " << endl;
+		for (int j = 0; j < m; j++) {
+			cout << "name: " << t[i].stu[j].name << endl;
+			cout << "score: " << t[i].stu[j].score << endl;
+			cout << endl;
+		}
+	}
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int n, m;
+	cout << "teacher's numbers: ";
+	cin >> n;
+	cout << "student's numbers: ";
+	cin >> m;
+	vector <teacher> teaArray(n);
+	teacher_design(n, m, teaArray);
+	print(n, m, teaArray);
+	return 0;
+}
