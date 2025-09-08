@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+
+using namespace std;
+
+void Swap(int a, int b) {
+
+	int tem = a;
+	a = b;
+	b = tem;
+}
+
+void Swap_p(int* a, int* b) {
+	int tem = *a;
+	*a = *b;
+	*b = tem;
+}
+
+void Swap_g(int& a, int& b) {
+	int tem = a;
+	a = b;
+	b = tem;
+}
+
+int main() {
+	int a = 10;
+	int b = 20;
+	/*Swap(a, b);*/
+	/*Swap_p(&a, &b);*/
+	Swap_g(a, b);
+	cout << "a = " << a << endl;
+	cout << "b = " << b << endl;
+	return 0;
+}
