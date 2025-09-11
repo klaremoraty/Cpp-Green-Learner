@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+const int Max = 100; // 定义线性表的最大元素数量，假设默认为100
+
+template <class DataType>
+class Seqlist {
+private:
+	DataType list[Max]; // 定义一个可DataType的list
+	int m_size; // 线性表的大小，或者是说：长度
+
+public:
+	Seqlist(const DataType *p,int n)  { // 构造函数，在main函数中初始化一个顺序表，借助参数传递入类之中，同时录入该线性表的长度
+		m_size = n; // 初始化同步对象的长度，为public之中的函数做准备
+
+	    // 复制线性表的内容
+		for (int i = 0; i < n; i++) {
+			list[i] = p[i];
+		}
+	}
+	//定义remove_k函数，使得类可以实现题目要求
+	void remove_k(int i, int k,int &flag) {
+		if (i < 1 || i > m_size || k <= 0 || k > m_size - i + 1) { 在需要删去的元素超过了范围时，返回error
+			cout << "error" << endl;
+			flag = 0;
+			return;
+		}
+		else {
+			int start = i - 1; // 定义第一个要删去的索引
+			int last = m_size - k; // 定义最后一个要删去的元素，以m_size - k写是怕last过界，至少这样写肯定不会过界
+			for (int j = start; j < last; j++) { // 设计for循环，删去元素，同时可以形成剪枝
+				list[j] = list[j + k]; // 使用覆盖法，实现删去
+			}
+			m_size -= k; // 将线性表的长度修改
+		}
+	}
+	// 实现打印线性表的功能
+	void print() {
+		for (int i = 0; i < m_size; i++) {
+			if (i > 0) cout << " ";
+			cout << list[i];
+		}
+		cout << endl;
+	}
+};
+
+int main() {
+	int i, k,flag = 1; //i,k为题目要求，而flag为判断标致，有true,false两种值，可以决定是否运行print函数
+	cin >> i >> k;
+	int nums[] = { 10,9,8,7,6,5,4,3,2,1 }; // 自定义线性表的内容
+	int n = sizeof(nums) / sizeof(nums[0]); // 求出线性表的长度
+	Seqlist<int> list(nums,n); // 导入类对象之中，运用构造函数
+	list.remove_k(i,k,flag);
+	if (flag) {list.print();}
+	return 0;
+}
