@@ -1,0 +1,156 @@
+#include <iostream>
+
+using namespace std;
+
+template <typename DataType>
+
+class NodeList {
+private:
+	struct Node {
+		DataType data;
+		Node* next;
+		Node(DataType dat) :data(dat), next(nullptr) {}
+	};
+	int size;
+	Node* head;
+
+public:
+	NodeList():size(0), head(nullptr) {}
+	void push_front(DataType num) {
+		Node* newnode = new Node(num);
+		newnode->next = head;
+		head = newnode;
+		size++;
+	}
+
+	int get_size() {
+		return size;
+	}
+
+	void push_back(DataType num) {
+		Node* newnode = new Node(num);
+		if (head == nullptr) {
+			head = newnode;
+		}
+		else {
+			Node* temp = head;
+			while (temp->next != nullptr) {
+				temp = temp->next;
+			} 
+			temp->next = newnode;
+		}
+		size++;
+	}
+
+	DataType get_index_data(int x) {
+		if (x < 1 || x > size) {
+			throw out_of_range("index out of range");
+		}
+		int cnt = 1;
+		Node* temp = head;
+		while (cnt < x) {
+			cnt++;
+			temp = temp->next;
+		}
+		return temp->data;
+	}
+
+	void delete_data(DataType num) {
+		if (head == nullptr)return;
+		if (head->data == num) {
+			Node* temp = head;
+			head = head->next;
+			delete temp;
+			size--;
+			return;
+		}
+		Node* temp = head;
+		while (temp->next != nullptr && temp->next->data != num) {
+			temp = temp->next;	
+		}
+		if (temp->next == nullptr) {
+			cout << "no " << num << endl;
+			return;
+		}
+		Node* current = temp->next;
+		temp->next = current->next;
+		delete current;
+		size--;
+	}
+
+	void print() const{
+		Node * temp = head;
+		while (temp != nullptr) {
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		cout << endl;
+	}
+
+	void reverse(NodeList& L) {
+		Node* temp;
+		Node* curr;
+		Node* prev = nullptr;
+		temp = L.head;
+		while (temp) {
+			curr = temp;
+			temp = temp->next;
+			curr->next = prev;
+			prev = curr;
+		}
+		L.head = prev;
+	}
+
+	void difference(NodeList<DataType>& a, NodeList<DataType>& b);
+	
+	Node* get_head() {
+		return head;
+	}
+
+	~NodeList() {
+		Node* temp = head;
+		while (temp != nullptr) {
+			Node* current = temp->next;
+			delete temp;
+			temp = current;
+		}
+	}
+};
+
+template <typename DataType>
+
+void NodeList<DataType>::difference(NodeList<DataType>& a, NodeList<DataType>& b) {
+	Node* node_a = a.get_head();
+	Node* node_b = b.get_head();
+	NodeList<DataType> c;
+	while (node_a) {
+		if (node_b && node_a->data == node_b->data) {
+			node_a = node_a->next;
+			node_b = node_b->next;
+		}
+		else if (!node_b || node_a->data < node_b->data) {
+			c.push_back(node_a->data);
+			node_a = node_a->next;
+		}
+		else {
+			node_b = node_b->next;
+		}
+	}
+	c.print();
+}
+
+int main() {
+	NodeList<int> nums_1,nums_2;
+	int num;
+	while(cin.peek() != '\n' && cin >> num) {
+		nums_1.push_back(num);
+	}
+	cin.ignore();
+	while (cin.peek() != '\n' && cin >> num) {
+		nums_2.push_back(num);
+	}
+	nums_1.difference(nums_1, nums_2);
+	return 0;
+}
+
+
